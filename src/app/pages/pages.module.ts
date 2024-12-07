@@ -9,17 +9,19 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
 import { AppDashboardComponent } from './dashboard/dashboard.component';
+import {ProjectComponent} from "./project/project.component";
 
 @NgModule({
   declarations: [AppDashboardComponent],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    FormsModule,
-    NgApexchartsModule,
-    RouterModule.forChild(PagesRoutes),
-    TablerIconsModule.pick(TablerIcons),
-  ],
+    imports: [
+        CommonModule,
+        MaterialModule,
+        FormsModule,
+        NgApexchartsModule,
+        RouterModule.forChild(PagesRoutes),
+        TablerIconsModule.pick(TablerIcons),
+        ProjectComponent,
+    ],
   exports: [TablerIconsModule],
 })
 export class PagesModule {}

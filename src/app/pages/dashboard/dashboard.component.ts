@@ -3,6 +3,8 @@ import { ProjectApiService } from '../../services/project-api.service';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatSort, MatSortModule} from '@angular/material/sort';
+import { ProductsData } from '../../models/products-data.model';
+
 
 
 
@@ -75,19 +77,8 @@ interface stats {
   link?: string;
 }
 
-export interface productsData {
-  id: number;
-  nom: string;
-  date_creation: string;
-  date_lastmodification: string;
-  statut: string;
-  date_atterrissage: number;
-  priority: string;
 
 
-
-
-}
 
 // ecommerce card
 interface productcards {
@@ -105,6 +96,7 @@ interface productcards {
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   encapsulation: ViewEncapsulation.None,
+
 })
 export class AppDashboardComponent implements AfterViewInit{
   @ViewChild('chart') chart: ChartComponent = Object.create(null);
@@ -115,7 +107,7 @@ export class AppDashboardComponent implements AfterViewInit{
 
   displayedColumns: string[] = ['assigned', 'name', 'priority', 'budget'];
 
-  dataSource = new MatTableDataSource<productsData>();
+  dataSource = new MatTableDataSource<ProductsData>();
 
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -127,7 +119,9 @@ export class AppDashboardComponent implements AfterViewInit{
   }
 
   ngOnInit() {
-    this.projectApiService.getTopProjects().subscribe((projects: productsData[]) => {
+    this.projectApiService.fetchAndStoreTopProjects();
+    this.projectApiService.getTopProjects().subscribe((projects: ProductsData[]) => {
+
         this.dataSource.data = projects;
     });
   }

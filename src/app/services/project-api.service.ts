@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import { map } from 'rxjs/operators';
-import { productsData } from '../pages/dashboard/dashboard.component';
+import { ProductsData } from '../models/products-data.model';
 import { environment } from '../../environments/environment';
 
 
@@ -13,16 +13,38 @@ import { environment } from '../../environments/environment';
 export class ProjectApiService {
 
   //TODO : envoyer l'id depuis le composant
-  private apiUrl = environment.apiUrl+"/:1/projects"; // Remplacez par votre URL d'API
+  private apiUrl = `${environment.apiUrl}/:1/projects`; // Remplacez par votre URL d'API
+  private projectsDataSubject = new BehaviorSubject<ProductsData[]>([]);
+  projectsData$ = this.projectsDataSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
-  getTopProjects(): Observable<productsData[]> {
-    return this.http.get<productsData[]>(this.apiUrl).pipe(
+  fetchAndStoreTopProjects(): void {
+    this.http.get<ProductsData[]>(this.apiUrl).pipe(
       map(response => {
-        // Traitez la réponse si nécessaire (traitement metier si besoin)
+        // Traitez la réponse si nécessaire
         return response;
       })
+    ).subscribe(
+      data => this.projectsDataSubject.next(data),
+      error => console.error('Erreur lors de la récupération des projets :', error)
     );
   }
+
+  fetchDataIfNeeded(): void {
+    if (this.projectsDataSubject.getValue().length === 0) {
+      this.http.get<ProductsData[]>(this.apiUrl).pipe(
+        map(response => response)
+      ).subscribe(
+        data => this.projectsDataSubject.next(data),
+        error => console.error('Erreur lors de la récupération des projets :', error)
+      );
+    }
+  }
+
+  getTopProjects(): Observable<ProductsData[]> {
+    return this.projectsData$;
+  }
+
+
 }
