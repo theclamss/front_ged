@@ -1,4 +1,10 @@
 import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
+import { ProjectApiService } from '../../services/project-api.service';
+
+
+
+
+
 import {
   ApexChart,
   ChartComponent,
@@ -138,7 +144,17 @@ export class AppDashboardComponent {
   public monthlyChart!: Partial<monthlyChart> | any;
 
   displayedColumns: string[] = ['assigned', 'name', 'priority', 'budget'];
-  dataSource = ELEMENT_DATA;
+
+  dataSource: productsData[] = [];
+
+
+
+  ngOnInit() {
+    this.projectApiService.getTopProjects().subscribe((projects: productsData[]) => {
+      this.dataSource = projects;
+    });
+  }
+
 
   months: month[] = [
     { value: 'mar', viewValue: 'March 2023' },
@@ -221,7 +237,7 @@ export class AppDashboardComponent {
     },
   ];
 
-  constructor() {
+  constructor(private projectApiService: ProjectApiService) {
     // sales overview chart
     this.salesOverviewChart = {
       series: [
@@ -401,4 +417,7 @@ export class AppDashboardComponent {
       },
     };
   }
+
+
+
 }
