@@ -45,6 +45,7 @@ import { MatTableModule } from '@angular/material/table';
 @NgModule({
   declarations: [],
   exports: [
+    MatIconModule,
     MatAutocompleteModule,
     MatCheckboxModule,
     MatDatepickerModule,

@@ -1,5 +1,7 @@
-import {AfterViewInit, Component, Input, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, ViewChild, ViewEncapsulation} from '@angular/core';
 import { ProjectApiService } from '../../services/project-api.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 
 import {
   MatCell,
@@ -8,7 +10,8 @@ import {
   MatHeaderCell, MatHeaderCellDef,
   MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
   MatTable,
-  MatTableDataSource
+  MatTableDataSource,
+
 } from '@angular/material/table';
 // Check if the module '../../services/project-api.service' exports 'productsData' and export it if not.
 import { ProductsData } from '../../models/products-data.model';
@@ -23,45 +26,20 @@ import {NgApexchartsModule} from "ng-apexcharts";
 import {NgForOf, NgIf, TitleCasePipe} from "@angular/common";
 import {TablerIconsModule} from "angular-tabler-icons";
 import {Observable} from "rxjs";
+import {DialogContentComponent} from "../modalsUi/dialog-content/dialog-content.component";
+import {SelectionModel} from "@angular/cdk/collections";
 
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
-  standalone: true,
-  imports: [
-    MatTable,
-    MatPaginator,
-    MatCard,
-    MatCardContent,
-    MatCardHeader,
-    MatCardTitle,
-    MatCell,
-    MatCellDef,
-    MatColumnDef,
-    MatFabButton,
-    MatFormField,
-    MatHeaderCell,
-    MatHeaderRow,
-    MatHeaderRowDef,
-    MatMiniFabButton,
-    MatOption,
-    MatRow,
-    MatRowDef,
-    MatSelect,
-    MatSort,
-    NgApexchartsModule,
-    NgForOf,
-    TablerIconsModule,
-    TitleCasePipe,
-    NgIf,
-    MatHeaderCellDef
-  ]
+  encapsulation: ViewEncapsulation.None
 })
 export class ProjectComponent implements AfterViewInit{
   displayedColumns: string[] = ['assigned', 'name', 'priority', 'budget'];
 
   dataSource: MatTableDataSource<ProductsData> = new MatTableDataSource<ProductsData>();
 
+  selectedElement: ProductsData | null = null;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -77,5 +55,41 @@ export class ProjectComponent implements AfterViewInit{
     console.log("zebi" +this.dataSource.data);
   }
 
-  constructor(private projectApiService: ProjectApiService) {};
+  onRowClick(row: ProductsData) {
+    const dialogRef = this.dialog.open(DialogContentComponent, {
+      data: row
+    });
+    }
+
+
+
+  selection = new SelectionModel<any>(true, []); // true pour multi-sélection
+
+  /** Vérifie si tous les éléments sont sélectionnés */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Sélectionne ou désélectionne toutes les lignes */
+  toggleAllRows() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+    } else {
+      this.dataSource.data.forEach(row => this.selection.select(row));
+    }
+  }
+
+  /** Sélectionne ou désélectionne une ligne individuelle */
+  toggleRow(row: any) {
+    this.selection.toggle(row);
+  }
+
+
+
+
+
+
+  constructor(private projectApiService: ProjectApiService, public dialog: MatDialog) {};
 }

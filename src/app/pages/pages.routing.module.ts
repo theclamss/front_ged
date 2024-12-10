@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AppDashboardComponent } from './dashboard/dashboard.component';
+import {ProjectComponent} from "./project/project.component";
 
 export const PagesRoutes: Routes = [
   {
@@ -8,5 +9,5 @@ export const PagesRoutes: Routes = [
     data: {
       title: 'Starter Page',
     },
-  },
+  }
 ];

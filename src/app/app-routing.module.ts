@@ -5,7 +5,7 @@ import { FullComponent } from './layouts/full/full.component';
 import {ProjectComponent} from "./pages/project/project.component";
 
 const routes: Routes = [
-  { path: 'projects', component: ProjectComponent },
+
   {
     path: '',
     component: FullComponent,
@@ -19,6 +19,11 @@ const routes: Routes = [
         path: 'dashboard',
         loadChildren: () =>
           import('./pages/pages.module').then((m) => m.PagesModule),
+      },
+      {
+        path: 'projects',
+        loadChildren: () =>
+          import('./pages/project/projects.module').then((m) => m.ProjectsModule),
       },
       {
         path: 'ui-components',

@@ -25,6 +25,7 @@ import {
   ApexMarkers,
   ApexResponsive,
 } from 'ng-apexcharts';
+import {SelectionModel} from "@angular/cdk/collections";
 
 interface month {
   value: string;
@@ -106,6 +107,7 @@ export class AppDashboardComponent implements AfterViewInit{
   public monthlyChart!: Partial<monthlyChart> | any;
 
   displayedColumns: string[] = ['assigned', 'name', 'priority', 'budget'];
+  displayedColumnsBis: string[] = ['assigned', 'name', 'priority', 'budget','select'];
 
   dataSource = new MatTableDataSource<ProductsData>();
 
@@ -125,6 +127,36 @@ export class AppDashboardComponent implements AfterViewInit{
         this.dataSource.data = projects;
     });
   }
+
+  selection = new SelectionModel<any>(true, []); // true pour multi-sélection
+
+  /** Vérifie si tous les éléments sont sélectionnés */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Sélectionne ou désélectionne toutes les lignes */
+  toggleAllRows() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+    } else {
+      this.dataSource.data.forEach(row => this.selection.select(row));
+    }
+  }
+
+  /** Sélectionne ou désélectionne une ligne individuelle */
+  toggleRow(row: any) {
+    this.selection.toggle(row);
+  }
+
+
+
+  downloadSelectedFiles(){
+    console.log("telecharger");
+  }
+
 
 
   months: month[] = [
