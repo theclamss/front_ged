@@ -52,7 +52,7 @@ export class ProjectComponent implements AfterViewInit{
   ngOnInit() {
     this.projectApiService.fetchAndStoreTopProjects();
     this.projectApiService.getTopProjects().subscribe(data => this.dataSource.data = data);
-    console.log("zebi" +this.dataSource.data);
+
   }
 
   onRowClick(row: ProductsData) {

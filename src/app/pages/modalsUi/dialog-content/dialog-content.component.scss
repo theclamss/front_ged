@@ -1,0 +1,56 @@
+.dialog-container {
+  padding: 16px;
+  width: 100%;
+  max-width: 900px; /* Largeur maximale pour votre boîte de dialogue */
+  position: relative;
+  box-sizing: border-box; /* Assure que les paddings sont pris en compte correctement */
+  margin-bottom: 16px; /* Ajoute un espace entre le bord inférieur du dialogue */
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: #333;
+}
+
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Espacement vertical entre les lignes de sections */
+  padding: 16px; /* Ajoute de l’espace autour du contenu */
+  box-sizing: border-box; /* Assure un calcul correct des paddings */
+  background: #fff;
+  border-radius: 8px; /* Arrondi les angles pour éviter un aspect "collé" aux bords */
+}
+
+.row {
+  display: flex;
+  gap: 16px; /* Espacement horizontal entre les sections */
+  margin-bottom: 16px; /* Espace sous chaque ligne */
+}
+
+.section {
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  background: #f9f9f9; /* Ajoute un léger contraste pour mieux visualiser les sections */
+  border-radius: 8px; /* Arrondi les angles des sections */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre pour détacher visuellement la section */
+}
+
+.section-long {
+  flex: 1;
+  padding: 16px;
+  height: auto;
+
+}
+
+.mat-dialog-container {
+  padding: 24px; /* Espace autour du contenu du dialogue pour l'ensemble */
+  border-radius: 8px; /* Arrondi les coins de la boîte de dialogue */
+  background: #fff;
+}

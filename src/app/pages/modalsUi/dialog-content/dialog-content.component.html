@@ -1,0 +1,78 @@
+<div class="dialog-container">
+  <!-- Bouton de fermeture placé en haut à droite -->
+
+
+  <!-- Contenu principal du dialogue -->
+  <div class="dialog-content">
+    <div class="row">
+      <!-- Première section : plus longue et moins large -->
+      <mat-card class="section section-long">
+        <mat-card-content class="p-24">
+          <mat-card-title>Workflow du fichier</mat-card-title>
+
+          <div class="timeline m-t-24">
+            <div
+              class="timeline-item d-flex overflow-hidden"
+              *ngFor="let stat of stats"
+            >
+              <div class="time text-right mat-subtitle-1 f-s-14">
+                {{ stat.time }}
+              </div>
+              <div class="point d-flex align-items-center">
+                <span
+                  class="timeline-badge border-{{ stat.color }} m-y-8"
+                ></span>
+                <span class="timline-border d-block"></span>
+              </div>
+              <div class="desc">
+                <ng-template [ngIf]="stat.subtext">
+                  <span class="mat-subtitle-1 f-s-14 lh-20">
+                    {{ stat.subtext }}
+                  </span>
+                </ng-template>
+                <ng-template [ngIf]="stat.title">
+                  <span class="mat-subtitle-1 f-s-14 lh-20 f-w-600 d-block">
+                    {{ stat.title }}
+                  </span>
+                </ng-template>
+                <ng-template [ngIf]="stat.link">
+                  <a
+                    href="#"
+                    class="text-primary text-decoration-none mat-body-1"
+                  >#ML-3467</a
+                  >
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Deuxième section normale -->
+      <mat-card class="section">
+        <mat-card-content class="p-24">
+          <mat-card-title>Section Supplémentaire</mat-card-title>
+          <button (click)="openPDF()">Ouvrir le PDF</button>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="row">
+      <!-- Troisième section -->
+      <mat-card class="section">
+        <mat-card-content class="p-24">
+          <mat-card-title>Section 3</mat-card-title>
+          <p>Voici le contenu de la troisième section.</p>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Quatrième section -->
+      <mat-card class="section">
+        <mat-card-content class="p-24">
+          <mat-card-title>Section 4</mat-card-title>
+          <p>Voici une autre section, pour démonstration.</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

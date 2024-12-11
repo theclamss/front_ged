@@ -136,7 +136,7 @@ export class AppDashboardComponent implements AfterViewInit{
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
-
+ //TODO : fix icon on download button
   /** Sélectionne ou désélectionne toutes les lignes */
   toggleAllRows() {
     if (this.isAllSelected()) {
