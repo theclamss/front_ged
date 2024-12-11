@@ -3,6 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { FullComponent } from './layouts/full/full.component';
 import {ProjectComponent} from "./pages/project/project.component";
+import { RoleManagementComponent } from './pages/admin/role-management/role-management.component';
+import { UserManagementComponent } from './pages/admin/user-management/user-management.component';
+import { ProjectManagementComponent } from './pages/admin/project-management/project-management.component';
+import { FileManagementComponent } from './pages/admin/file-management/file-management.component';
+import {AdminGuard} from "./guards/admin.guard";
+//import { AdminGuard } from './guards/admin.guard'; // à implémenter
+
 
 const routes: Routes = [
 
@@ -36,6 +43,29 @@ const routes: Routes = [
         path: 'extra',
         loadChildren: () =>
           import('./pages/extra/extra.module').then((m) => m.ExtraModule),
+      },
+    ],
+  },
+  {
+    path: 'admin',
+    component: FullComponent,
+    canActivate: [AdminGuard], // Vérification du token admin
+    children: [
+      {
+        path: 'rolesM',
+        component: RoleManagementComponent, // Gestion des rôles
+      },
+      {
+        path: 'usersM',
+        component: UserManagementComponent, // Gestion des utilisateurs
+      },
+      {
+        path: 'projectsM',
+        component: ProjectManagementComponent, // Gestion des projets
+      },
+      {
+        path: 'filesM',
+        component: FileManagementComponent, // Gestion des fichiers
       },
     ],
   },

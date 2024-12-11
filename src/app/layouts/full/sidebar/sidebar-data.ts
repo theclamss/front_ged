@@ -15,6 +15,31 @@ export const navItems: NavItem[] = [
     route: '/projects',
   },
   {
+    navCap: 'Admin',
+  },
+  {
+    displayName: 'Projects management',
+    iconName: 'layout-dashboard',
+    route: '/admin/projectsM',
+  },
+  {
+    displayName: 'Files management',
+    iconName: 'layout-dashboard',
+    route: '/admin/filesM',
+  },
+  {
+    displayName: 'Users management',
+    iconName: 'layout-dashboard',
+    route: '/admin/usersM',
+  },
+  {
+    displayName: 'Roles management',
+    iconName: 'layout-dashboard',
+    route: '/admin/rolesM',
+  },
+
+
+  {
     navCap: 'Ui Components',
   },
   {
