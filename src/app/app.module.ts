@@ -26,6 +26,12 @@ import { AppNavItemComponent } from './layouts/full/sidebar/nav-item/nav-item.co
 import {ProjectComponent} from "./pages/project/project.component";
 import {RequestInterceptor} from "./interceptor/RequestInterceptor";
 import { TokenMockService } from './services/ephemere/token-mock.service';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatDatepickerModule} from "@angular/material/datepicker";
 
 //TODO : enlever la simulation APPINITILIZER et le service mocktoken quand le backend est pret
 
@@ -39,6 +45,7 @@ import { TokenMockService } from './services/ephemere/token-mock.service';
     BrandingComponent,
     AppNavItemComponent,
 
+
   ],
   imports: [
     BrowserModule,
@@ -48,7 +55,14 @@ import { TokenMockService } from './services/ephemere/token-mock.service';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
     TablerIconsModule.pick(TablerIcons),
+
   ],
   exports: [TablerIconsModule],
   providers: [

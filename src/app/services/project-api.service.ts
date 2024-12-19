@@ -13,7 +13,7 @@ import { environment } from '../../environments/environment';
 export class ProjectApiService {
 
   //TODO : envoyer l'id depuis le composant
-  private apiUrl = `${environment.apiUrl}/:1/projects`; // Remplacez par votre URL d'API
+  private apiUrl = `${environment.apiUrl}/users/:1/projects`; // Remplacez par votre URL d'API
   private projectsDataSubject = new BehaviorSubject<ProductsData[]>([]);
   projectsData$ = this.projectsDataSubject.asObservable();
 
@@ -45,6 +45,11 @@ export class ProjectApiService {
   getTopProjects(): Observable<ProductsData[]> {
     return this.projectsData$;
   }
+
+  addProject(project: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, project);
+  }
+
 
 
 }

@@ -11,7 +11,7 @@ import {map} from "rxjs/operators";
 export class FilesApiService {
 
   //TODO : envoyer l'id depuis le composant
-  private apiUrl = `${environment.apiUrl}/files/:1/workflow`; // Remplacez par votre URL d'API
+  private apiUrl = `${environment.apiUrl}/users/files/:1/workflow`; // Remplacez par votre URL d'API
   private workflowFilesDataSubject = new BehaviorSubject<Workflow[]>([]);
   projectsData$ = this.workflowFilesDataSubject.asObservable();
 
